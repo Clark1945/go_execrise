@@ -10,6 +10,7 @@ func nums(id string, i ...int) { //參數不定函式
 	}
 	fmt.Println(total)
 }
+
 func main() {
 	nums("John", 100, 70)
 	fmt.Println("---------------------------------------")
@@ -17,6 +18,16 @@ func main() {
 	nums("Kelvin", best...)
 	// nums()
 	// nums(8763)
+	mes := "Your mejesty"
+	func(message string) {
+		fmt.Println(message)
+	}(mes)
+
+	AGL := func() {
+		fmt.Println("I wish to go Japan")
+	}
+	AGL()
+
 }
 
 //Printf = Print have format
