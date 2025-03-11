@@ -37,6 +37,13 @@ func main() {
 	b := &point{}
 	b.setPoint(10, 5)
 	fmt.Println("B=", b)
+
+	anonymousFunc()
+
+	devSalary := salary(50, 2080, developerSalary)
+	manangerSalary := salary(150000, 25000, managerSalary)
+	fmt.Println("經理:", manangerSalary)
+	fmt.Println("瑪儂:", devSalary)
 }
 
 func memoryTest() {
@@ -175,5 +182,44 @@ func doubler(v interface{}) (string, error) {
 		return "string" + s, nil
 	case bool:
 		return "true", nil
+	default:
+		return "none", nil
 	}
+}
+
+func itemSold() {
+	items := make(map[string]int)
+	items["John"] = 11
+
+	for k, v := range items {
+		if v > 10 {
+			fmt.Println(k, "低於預期", v)
+		}
+	}
+}
+
+func anonymousFunc() {
+	message := "Greeting!"
+	func(str string) {
+		fmt.Print("Anonymous", str)
+	}(message) // 執行小括號 直接呼叫
+	f := func(str string) {
+		fmt.Print("Anonymous", str)
+	}
+	f(message)
+}
+
+type salaryFunc func(int, int) int
+
+func salary(x, y int, f salaryFunc) int {
+	pay := f(x, y)
+	return pay
+}
+
+func managerSalary(baseSalary, bonus int) int {
+	return baseSalary + bonus
+}
+
+func developerSalary(hourlyRate, hoursWorked int) int {
+	return hourlyRate * hoursWorked
 }
