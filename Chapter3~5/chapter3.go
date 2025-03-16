@@ -201,10 +201,10 @@ func itemSold() {
 func anonymousFunc() {
 	message := "Greeting!"
 	func(str string) {
-		fmt.Print("Anonymous", str)
+		fmt.Println("Anonymous", str)
 	}(message) // 執行小括號 直接呼叫
 	f := func(str string) {
-		fmt.Print("Anonymous", str)
+		fmt.Println("Anonymous", str)
 	}
 	f(message)
 }
