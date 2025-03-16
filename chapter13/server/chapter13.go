@@ -3,12 +3,17 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"io"
+	"log"
+	"net/http"
 
 	_ "github.com/go-sql-driver/mysql"
 )
 
 func main() {
 	checkConnMySql()
+	var response string = sendRequest()
+	fmt.Println(response)
 }
 
 func checkConnMySql() {
@@ -100,4 +105,23 @@ func checkConnMySql() {
 type employee struct {
 	id   int
 	name string
+}
+
+func sendRequest() string {
+	resp, err := http.Get("https://www.google.com")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		log.Fatal(resp.StatusCode)
+	}
+
+	data, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return string(data)
 }
