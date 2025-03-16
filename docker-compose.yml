@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass  # root 使用者密碼
+      MYSQL_DATABASE: mydatabase     # 預設建立的資料庫
+      MYSQL_USER: myuser             # 自訂使用者名稱
+      MYSQL_PASSWORD: mypassword     # 自訂使用者密碼
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+
+volumes:
+  mysql_data:
